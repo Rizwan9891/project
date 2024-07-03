@@ -1,4 +1,4 @@
-import { createForm } from '../_controllers/form.controller.js';
+import { getCurrentLocationWeather, getHourlyForecast, getDailyForecast } from '../_controllers/weather.controller.js';
 
 export default (app) => {
     app.use((req, res, next) => {
@@ -10,5 +10,7 @@ export default (app) => {
         res.header('Content-Type', 'application/json; charset=utf-8');
         next();
     });
-    app.post('/api/feedback/add', createForm);
+    app.get('/api/get/current/location/weather', getCurrentLocationWeather);
+    app.get('/api/get/hourly/forecast', getHourlyForecast);
+    app.get('/api/get/daily/forecast', getDailyForecast);
 };
