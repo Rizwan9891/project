@@ -1,4 +1,4 @@
-import { getCurrentLocationWeather, getHourlyForecast, getDailyForecast } from '../_controllers/weather.controller.js';
+import { getCurrentLocationWeather, getHourlyForecast, getDailyForecast, getClimateForecast } from '../_controllers/weather.controller.js';
 
 export default (app) => {
     app.use((req, res, next) => {
@@ -13,4 +13,5 @@ export default (app) => {
     app.get('/api/get/current/location/weather', getCurrentLocationWeather);
     app.get('/api/get/hourly/forecast', getHourlyForecast);
     app.get('/api/get/daily/forecast', getDailyForecast);
+    app.get('/api/get/climate/forecast', getClimateForecast);
 };

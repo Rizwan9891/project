@@ -71,3 +71,26 @@ export const getDailyForecast = (req, res) => {
         res.status(500).json({ error: true, message: "Internal server error", error: error });
     });
 }
+export const getClimateForecast = (req, res) => {
+    const requiredFields = ['lat', 'lon'];
+    for (const field of requiredFields) {
+        if (!req.query[field]) {
+            return res.status(400).json({ error: true, message: `${field} is required.` });
+        }
+    }
+    const { lon, lat } = req.query;
+    const queryParams = new URLSearchParams({
+        lat: lat,
+        lon: lon,
+        appid: config.apiKey,
+    }).toString();
+    let configData = {
+        url: `${config.baseURL}forecast/climate?${queryParams}`,
+        method: "get",
+    }
+    APIRequest(configData).then((response) => {
+        res.status(200).json({ error: true, message: "Data found successfully.", data: response });
+    }).catch((error) => {
+        res.status(500).json({ error: true, message: "Internal server error", error: error });
+    });
+}
